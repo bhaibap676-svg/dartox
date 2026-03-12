@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { toast } from 'sonner';
-import { ShoppingBag, Image, Tag, MapPin, Smartphone, Store, Clock, CreditCard, CheckCircle, X, Upload, Camera, Ruler, Mic } from 'lucide-react';
+import { ShoppingBag, Image, Tag, MapPin, Smartphone, Store, Clock, CreditCard, CheckCircle, X, Upload } from 'lucide-react';
 
 export default function SellPage() {
   const [step, setStep] = useState(1);
@@ -46,7 +46,7 @@ export default function SellPage() {
         ? 'bg-orange-100 text-orange-800 border border-orange-200' 
         : 'bg-blue-100 text-blue-800 border border-blue-200'
     }`}>
-      {type === 'PRE_OWNED' ? '🛒 Used Item (OLX Style)' : '🏪 Brand New (Flipkart Style)'}
+      {type === 'PRE_OWNED' ? 'Used Item (OLX Style)' : 'Brand New (Flipkart Style)'}
     </div>
   );
 
@@ -81,6 +81,7 @@ export default function SellPage() {
             <div className={`w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg ${step === 1 ? 'ring-4 ring-blue-200' : ''}`}>1</div>
             <div className={`w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg ${step === 2 ? 'ring-4 ring-orange-200' : ''}`}>2</div>
             <div className={`w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center text-sm font-bold shadow-lg ${step === 3 ? 'ring-4 ring-green-200' : ''}`}>3</div>
+          </div>
         </div>
 
         {/* 3-Step Form */}
@@ -138,6 +139,7 @@ export default function SellPage() {
                       </div>
                     </button>
                   </div>
+                </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
@@ -159,6 +161,7 @@ export default function SellPage() {
                       </button>
                     ))}
                   </div>
+                </div>
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
@@ -183,6 +186,7 @@ export default function SellPage() {
                         className="w-full pl-8 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                     </div>
+                  </div>
                 </div>
 
               <button 
@@ -197,7 +201,8 @@ export default function SellPage() {
           {step === 2 && (
             <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
               <button onClick={() => setStep(1)} className="text-gray-500 hover:text-gray-700 mb-6 flex items-center gap-2">
-                <X className="w-5 h-5" /> Back to details
+                <X className="w-5 h-5" />
+                Back to details
               </button>
               
               <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
@@ -243,12 +248,14 @@ export default function SellPage() {
                   Continue to Review
                 </button>
               </div>
+            </div>
           )}
 
           {step === 3 && (
             <div className="bg-white p-8 rounded-3xl shadow-xl border border-gray-100">
               <button onClick={() => setStep(2)} className="text-gray-500 hover:text-gray-700 mb-6 flex items-center gap-2">
-                <X className="w-5 h-5" /> Back to photos
+                <X className="w-5 h-5" />
+                Back to photos
               </button>
               
               <h3 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-3">
@@ -273,6 +280,7 @@ export default function SellPage() {
                       <MapPin className="w-4 h-4" />
                       {productData.location || 'Your Location'}
                     </div>
+                  </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
@@ -289,4 +297,36 @@ export default function SellPage() {
                       onChange={(e) => setProductData({...productData, condition: e.target.value})}
                       className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500"
                     >
-                      <option>Like
+                      <option>Like New</option>
+                      <option>Gently Used</option>
+                      <option>Heavily Used</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <button 
+                onClick={handleSubmit}
+                disabled={loading}
+                className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-4 rounded-2xl font-bold text-lg hover:shadow-xl transition-all flex items-center justify-center gap-3 disabled:opacity-50"
+              >
+                {loading ? (
+                  <>
+                    <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                    Publishing...
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle className="w-5 h-5" />
+                    Publish Ad Now - Free!
+                  </>
+                )}
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
